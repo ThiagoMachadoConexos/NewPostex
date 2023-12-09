@@ -10,7 +10,13 @@ export default createStore({
         id: 1,
         nome: "Venial",
         senha: "123",
-        userPosts: [{ id: 0, content: "Eu amo meu curso!", data: undefined, curtidas: 25, respostas: [] }]
+        userPosts: [{ 
+          id: 0, content: "Eu amo meu curso!", data: undefined, curtidas: 25,
+          respostas: [
+            {id: 0, nome: "Thiago", content: "Vai para Geoloia", data: undefined, curtidas: 3},
+            {id: 1, nome: "Ricardo", content: "Formata meu pc", data: undefined, curtidas: 0}
+          ] 
+        }]
       }
     ],
   },
@@ -49,6 +55,26 @@ export default createStore({
         console.error('Usuário atual ou userPosts não está definido:', state.userAtual);
       }
     },
+    adicionarComment(state, comment) {
+      // const dataAtual = this.dispatch('definirData');
+      // if (state.userAtual) {
+      //   state.userAtual.userPosts.unshift({
+      //     id: state.userAtual.userPosts.length,
+      //     content: post.content,
+      //     curtidas: post.curtidas,
+      //     data: dataAtual,
+      //     respostas: [],
+      //     curtido: false
+      //   })
+      //   console.log(state.userAtual.userPosts)
+      //   console.log(state.users);
+      // }
+      // else {
+      //   console.error('Usuário atual ou userPosts não está definido:', state.userAtual);
+      // }
+      console.log(state)
+      console.log(comment)
+    },
     curtirPost(state, postagem) {
       const usuarioAtual = state.userAtual;
       const usuarioPost = postagem.user;
@@ -68,6 +94,12 @@ export default createStore({
       return this.dispatch('definirData').then(dataAtual => {
         newPost.data = dataAtual;
         commit('adicionarPost', newPost);
+      });
+    },
+    comentar({ commit }, newComment) {
+      return this.dispatch('definirData').then(dataAtual => {
+        newComment.data = dataAtual;
+        commit('adicionarComment', newComment);
       });
     },
     definirData() {
