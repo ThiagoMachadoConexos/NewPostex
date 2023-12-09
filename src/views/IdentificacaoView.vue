@@ -23,6 +23,7 @@
     data() {
       return {
         user: {
+          id: ++this.$store.state.idUser,
           nome: '',
           senha: '',
         },
@@ -31,6 +32,7 @@
     methods: {
       registra(){
         const newUser = {
+            id: this.user.id,
             nome: this.user.nome,
             senha: this.user.senha
         }

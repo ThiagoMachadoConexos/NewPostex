@@ -4,11 +4,13 @@ export default createStore({
   state: {
     dataAtual: undefined,
     userAtual: undefined,
+    idUser: 1,
     users: [
       {
+        id: 1,
         nome: "Venial",
         senha: "123",
-        userPosts: [{ content: "Eu amo meu curso!", data: undefined, curtidas: 25 }]
+        userPosts: [{ id: 0, content: "Eu amo meu curso!", data: undefined, curtidas: 25, respostas: [] }]
       }
     ],
   },
@@ -17,7 +19,7 @@ export default createStore({
       return state.users.some(usuario => usuario.nome === nome)
     },
     getPosts: state => state.users.userPosts,
-    getNomeUserAtual: state => state.userAtual.nome,
+    getNomeUserAtual: state => state.userAtual.nome
   },
   mutations: {
     definirUsuario(state, data) {
@@ -33,16 +35,33 @@ export default createStore({
       const dataAtual = this.dispatch('definirData');
       if (state.userAtual) {
         state.userAtual.userPosts.unshift({
+          id: state.userAtual.userPosts.length,
           content: post.content,
           curtidas: post.curtidas,
-          data: dataAtual
+          data: dataAtual,
+          respostas: [],
+          curtido: false
         })
         console.log(state.userAtual.userPosts)
+        console.log(state.users);
       }
       else {
         console.error('Usuário atual ou userPosts não está definido:', state.userAtual);
       }
-    }
+    },
+    curtirPost(state, post) {
+      const usuarioAtual = state.userAtual;
+      if (usuarioAtual) {
+        const postIndex = usuarioAtual.userPosts.findIndex(p => p.id === post.id);
+        if (postIndex !== -1) {
+          // Inverte o valor das curtidas e atualiza o status de curtida
+          const postAtual = usuarioAtual.userPosts[postIndex];
+          postAtual.curtidas = postAtual.curtido ? postAtual.curtidas - 1 : postAtual.curtidas + 1;
+          postAtual.curtido = !postAtual.curtido;
+          console.log(postAtual)
+        }
+      }
+    },
   },
   actions: {
     publicar({ commit }, newPost) {
@@ -61,7 +80,10 @@ export default createStore({
         minute: 'numeric',
       })
       return dataFormatada
-    }
+    },
+    curtirPost({ commit }, post) {
+      commit('curtirPost', post);
+    },
   },
   modules: {
   }
