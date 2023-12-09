@@ -6,7 +6,6 @@
         :key="post.content"
         :user="user"
         :post="post"
-        @curtir="curtirPost"
       />
     </div>
   </div>

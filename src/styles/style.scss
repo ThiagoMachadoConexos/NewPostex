@@ -57,7 +57,8 @@ nav {
 
 #new-post {
     display: flex;
-    justify-content: center;
+    flex-direction: column-reverse;
+    align-items: center;
 
     .publish-element {
         outline: none;
@@ -67,7 +68,7 @@ nav {
         color: white;
         border: $tertiary-color;
         padding: 20px;
-        width: 800px;
+        width: 660px;
     }
 
     input.publish-element {
@@ -84,12 +85,18 @@ nav {
         border-bottom-right-radius: 8px;
         width: 160px;
         cursor: pointer;
+        transition: .2s;
+
+        &:active {
+            color: #1a8cd8;
+            background-color: #FFF;
+        }
     }
 
     button.publish-element,
     input.publish-element {
-        margin-bottom: 20px;
         height: 90px;
+        margin-bottom: 20px;
     }
 }
 
@@ -210,7 +217,7 @@ nav {
     flex-direction: column;
     border: 2px solid $tertiary-color;
     border-bottom: 1px solid $tertiary-color;
-    width: 960px;
+    width: 820px;
     box-sizing: border-box;
     padding: 20px;
     font-size: 1.4rem;
@@ -219,6 +226,7 @@ nav {
 
     .post-username {
         font-weight: 800;
+        cursor: pointer;
     }
 
     .post-content {
@@ -227,16 +235,39 @@ nav {
         justify-content: space-between;
         align-items: center;
         flex-direction: row;
+        overflow: hidden;
+        word-wrap: break-word;
     }
 
     .post-info {
         display: flex;
-        justify-content: space-between;
+        justify-content: right;
 
         span {
+            padding: 0 10px;
+
             i.likeBtn {
                 background: none;
                 cursor: pointer;
+
+                &:hover {
+                    color: #F91880;
+                }
+            }
+
+            i.answerBtn {
+                cursor: pointer;
+                background: none;
+
+                &:hover {
+                    color: $secondary-color;
+                }
+            }
+
+            i.answerBtn:hover,
+            i.likeBtn:hover {
+                box-shadow: 0px 0px 15px 8px $tertiary-color;
+                background-color: hsl(220, 6%, 20%, 0.7);
             }
         }
 
@@ -244,4 +275,18 @@ nav {
             color: #595a5e;
         }
     }
+}
+
+.container-mensagem {
+    color: #9d1655;
+    background-color: #e88fb8;
+    border: 1px solid #9d1655;
+    border-radius: 5px;
+    padding: 10px;
+    max-width: 820px;
+    width: 820px;
+    text-align: center;
+    margin: 10px auto;
+    margin-top: -10px;
+    display: block;
 }
