@@ -37,7 +37,7 @@
     },
     methods: {
       curtir() {
-        this.$store.dispatch('curtirPost', this.post);
+        this.$store.dispatch('curtirPost', {user: this.user, post: this.post});
       },
     //   curtirPost(state, {usuarioAtual, post}) {
     //   //conferir se aquele usuario ja curtiu o post

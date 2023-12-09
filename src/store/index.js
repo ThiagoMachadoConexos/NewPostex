@@ -49,16 +49,16 @@ export default createStore({
         console.error('Usuário atual ou userPosts não está definido:', state.userAtual);
       }
     },
-    curtirPost(state, post) {
+    curtirPost(state, postagem) {
       const usuarioAtual = state.userAtual;
+      const usuarioPost = postagem.user;
       if (usuarioAtual) {
-        const postIndex = usuarioAtual.userPosts.findIndex(p => p.id === post.id);
+        const postIndex = usuarioPost.userPosts.findIndex(p => p.id === postagem.post.id);
         if (postIndex !== -1) {
           // Inverte o valor das curtidas e atualiza o status de curtida
-          const postAtual = usuarioAtual.userPosts[postIndex];
+          const postAtual = usuarioPost.userPosts[postIndex];
           postAtual.curtidas = postAtual.curtido ? postAtual.curtidas - 1 : postAtual.curtidas + 1;
           postAtual.curtido = !postAtual.curtido;
-          console.log(postAtual)
         }
       }
     },
@@ -81,8 +81,8 @@ export default createStore({
       })
       return dataFormatada
     },
-    curtirPost({ commit }, post) {
-      commit('curtirPost', post);
+    curtirPost({ commit },post) {
+      commit('curtirPost',post);
     },
   },
   modules: {
