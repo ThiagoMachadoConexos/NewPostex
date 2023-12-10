@@ -11,7 +11,7 @@
                 <input class="form-element" type="password" id="senha" placeholder="Senha" v-model="user.senha">
             </div>
         </form>
-        <button class="LoginBtn" @click.prevent="registra">Avançar</button>
+        <button class="LoginBtn" @click.prevent="login">Avançar</button>
       </div>
     </div>
   </template>
@@ -23,24 +23,28 @@
     data() {
       return {
         user: {
-          id: ++this.$store.state.idUser,
+          //id: ++this.$store.state.idUser,
           nome: '',
-          senha: '',
+          senha: ''
         },
       }
     },
     methods: {
-      registra(){
+      login(){
         const newUser = {
-            id: this.user.id,
+            //id: this.user.id,
             nome: this.user.nome,
             senha: this.user.senha
         }
-        if(this.verifica() && !this.$store.getters.verificarUserName(newUser.nome)) {
-          this.$store.commit('adicionarUsuario', newUser)
-          this.$store.commit('definirUsuario', newUser)
-          console.log('Login bem-sucedido')
-          this.$router.push('/home')
+        if(this.verifica() /*&& !this.$store.getters.verificarUserName(newUser.nome)*/) {
+          //verifica se o usuário já existe
+          const novo = this.$store.commit('verificarCadastro', newUser)
+          if(!novo) {
+            this.$store.commit('adicionarUsuario', newUser)
+            this.$store.commit('definirUsuario', newUser)
+            console.log('Login bem-sucedido')
+            this.$router.push('/home')
+          }
         }
         else console.log("Não foi possível realizar o login.")
       },

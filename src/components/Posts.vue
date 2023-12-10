@@ -1,6 +1,6 @@
 <template>
   <div id="Posts">
-    <div v-for="user in this.$store.state.users" :key="user.nome">
+    <div v-for="user in this.$store.state.users" :key="user.id">
       <Post
         v-for="post in user.userPosts"
         :key="post.content"
@@ -17,10 +17,10 @@ import Post from './Post.vue';
 export default {
   name: 'Posts',
   components: { Post },
-  methods: {
-    curtirPost(user, post) {
-      this.$store.commit('curtirPost', { user, post });
-    },
-  },
+  // methods: {
+  //   curtirPost(user, post) {
+  //     this.$store.commit('curtirPost', { user, post });
+  //   },
+  // },
 };
 </script>
