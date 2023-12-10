@@ -1,14 +1,16 @@
 <template>
   <div>
     <nav v-if="!Identification">
-      <div>
-        <span>Postex</span>
-      </div>
-      <div>
+      <span><i class="fa-solid fa-gear"></i></span>
+      <span>
+        <p class="postex">Poste<span class="blue-x">x</span></p>
+      </span>
+      <span class="nav-links">
+        <router-link class="nav-element" to="#">#EmAlta</router-link>
+        <router-link class="nav-element" to="#">Perfil</router-link>
         <router-link class="nav-element" to="/">Sair</router-link>
-        <router-link class="nav-element" to="">Perfil</router-link>
         <router-link class="nav-element" v-if="!isHome" to="/home">Home</router-link>
-      </div>
+      </span>
     </nav>
     <router-view/>
   </div>

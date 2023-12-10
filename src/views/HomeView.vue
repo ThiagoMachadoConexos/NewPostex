@@ -1,10 +1,8 @@
 <template>
   <div id="home">
-    <h1>Seja bem-vindo, @{{this.$store.getters.getNomeUserAtual}}!</h1>
+    <h1>Olá, @{{this.$store.getters.getNomeUserAtual}}!</h1>
     <NewPost @publicar="publicar"></NewPost>
     <Posts :posts="posts"></Posts>
-    <router-link to="/profile">Testando</router-link>
-    <router-view></router-view>
   </div>
 </template>
 

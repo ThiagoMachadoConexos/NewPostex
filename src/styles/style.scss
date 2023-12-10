@@ -14,38 +14,68 @@ body {
     background-color: $primary-color;
     color: #FFF;
     font-family: $primary-font;
+    background-color: black;
+}
+
+.postex {
+    font-family: serif;
+}
+
+.blue-x {
+    color: $secondary-color;
 }
 
 nav {
     color: white;
     text-decoration: none;
-    background-color: $secondary-color;
     display: flex;
     flex-direction: row;
     padding: 15px;
     align-items: center;
     justify-content: space-between;
 
-    &> :nth-child(2) {
-        display: flex;
-        flex-direction: row-reverse;
-    }
-
-    .nav-element {
-        background-color: $secondary-color;
-        display: block;
-        padding: 0 10px;
-    }
-
     a {
-        color: white;
+        color: #FFF;
         text-decoration: none;
         font-size: 1.2rem;
+
+        &:hover {
+            color: $secondary-color;
+        }
     }
 
     span {
-        font-size: 1.2rem;
+        font-size: 2.2rem;
         font-weight: 600;
+        padding: 0 10px;
+
+        p {
+            position: relative;
+            right: -75px;
+        }
+    }
+
+    span.nav-links {
+        display: flex;
+
+        .nav-element {
+            display: block;
+            padding: 0 10px;
+        }
+    }
+
+    span {
+        cursor: pointer;
+
+        p.postex {
+            font-size: 2.5rem;
+
+            span.blue-x {
+                font-size: 2.5rem;
+                padding: 0;
+                margin: 0;
+            }
+        }
     }
 }
 
@@ -180,10 +210,10 @@ nav {
     }
 
     h1.id-title {
+        @extend .postex;
         margin: 20px auto;
         font-size: 3em;
         font-weight: 600;
-        font-family: serif;
         position: relative;
         display: flex;
         align-content: center;
@@ -208,7 +238,7 @@ nav {
     }
 
     .id-title-x {
-        color: $secondary-color;
+        @extend .blue-x;
     }
 }
 
@@ -227,6 +257,10 @@ nav {
     .post-username {
         font-weight: 800;
         cursor: pointer;
+
+        i {
+            color: $secondary-color;
+        }
     }
 
     .post-content {
@@ -241,30 +275,41 @@ nav {
 
     .post-info {
         display: flex;
-        justify-content: right;
+        justify-content: space-between;
+
+        span.data-content {
+            padding: 0;
+        }
 
         span {
-            padding: 0 10px;
+            padding: 0 12px;
 
             i.likeBtn {
-                background: none;
-                cursor: pointer;
-
                 &:hover {
                     color: #F91880;
                 }
             }
 
             i.answerBtn {
-                cursor: pointer;
-                background: none;
-
                 &:hover {
                     color: $secondary-color;
                 }
             }
 
+            i.deleteBtn {
+                &:hover {
+                    color: rgb(240, 183, 29);
+                }
+            }
+
+            i.answerBtn,
+            i.deleteBtn,
+            i.likeBtn {
+                cursor: pointer;
+            }
+
             i.answerBtn:hover,
+            i.deleteBtn:hover,
             i.likeBtn:hover {
                 box-shadow: 0px 0px 15px 8px $tertiary-color;
                 background-color: hsl(220, 6%, 20%, 0.7);
@@ -272,7 +317,7 @@ nav {
         }
 
         &>:nth-child(1) {
-            color: #595a5e;
+            color: #6A7575;
         }
     }
 }
