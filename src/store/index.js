@@ -10,7 +10,13 @@ export default createStore({
         id: 1,
         nome: "Venial",
         senha: "123",
-        userPosts: [{ id: 0, content: "Eu amo meu curso!", data: undefined, curtidas: 25, respostas: [] }]
+        userPosts: [{
+          id: 0, content: "Eu amo meu curso!", data: undefined, curtidas: 25,
+          respostas: [
+            { id: 0, nome: "Thiago", content: "Vai para Geoloia", data: undefined, curtidas: 3 },
+            { id: 1, nome: "Ricardo", content: "Formata meu pc", data: undefined, curtidas: 0 }
+          ]
+        }]
       }
     ],
   },
@@ -97,6 +103,12 @@ export default createStore({
       return this.dispatch('definirData').then(dataAtual => {
         newPost.data = dataAtual;
         commit('adicionarPost', newPost);
+      });
+    },
+    comentar({ commit }, newComment) {
+      return this.dispatch('definirData').then(dataAtual => {
+        newComment.data = dataAtual;
+        commit('adicionarComment', newComment);
       });
     },
     definirData() {
